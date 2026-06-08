@@ -1,6 +1,27 @@
 const favorites = new Set();
 let currentPosts = [];
 
+function loadFavoritesFromStorage() {
+  const raw = localStorage.getItem('favoritesList');
+  if (!raw) return;
+
+  try {
+    const savedFavorites = JSON.parse(raw);
+    if (!Array.isArray(savedFavorites)) return;
+
+    savedFavorites.forEach(item => {
+      const id = typeof item === 'object' && item !== null && item.id != null
+        ? item.id
+        : item;
+      if (id != null) {
+        favorites.add(String(id));
+      }
+    });
+  } catch (e) {
+    console.warn('Could not parse favoritesList from localStorage', e);
+  }
+}
+
 async function getPosts(param)
 {   
     const selectors = "select=title,body,tags,id"
@@ -26,7 +47,7 @@ function renderFavoriteButton(postId) {
           </button>`;
 }
 
-async function getListOfPosts(posts)
+function getListOfPosts(posts)
 {
    currentPosts = posts;
    const postsContainer = document.querySelector(".posts-container");
@@ -50,6 +71,13 @@ async function getListOfPosts(posts)
       </div>`
    })
    updateFavoriteCount();
+
+   const favoritePosts = posts.filter(post => favorites.has(String(post.id)));
+   try {
+     localStorage.setItem('favoritesList', JSON.stringify(favoritePosts));
+   } catch (e) {
+     console.warn('Could not save favorites to localStorage', e);
+   }
 }
 
 const postsContainer = document.querySelector('.posts-container');
@@ -70,6 +98,42 @@ if (postsContainer) {
   });
 }
 
+
+let currentPage = "home";
+function changePage(page, id) {
+  // check if page has been changed
+  if (page == currentPage) {
+    return;
+  }
+  currentPage = page;
+  // 1) hide all pages
+  const pages = document.getElementsByTagName("main")
+  for (let i = 0; i < pages.length; i++) {
+    const element = pages[i];
+    // element.style.display = "none"
+    element.classList.remove("show")
+    element.classList.add("hide")
+  }
+
+  setTimeout(() => {
+    document.getElementById(page).classList.remove("hide");
+    document.getElementById(page).classList.add("show");
+  }, 400);
+
+  // 3) setup
+  if (page == "home") {
+    homePageInit();
+    document.title = "Posts Page";
+  } else if (page == "favoritePosts") {
+    favoritePostsPageInit();
+    document.title = "Favorite Posts Page";
+  } else if (page == "details") {
+    detailsPageInit(id);
+  }
+}
+
+
 document.addEventListener("DOMContentLoaded" , (e) => {
-  homePageInit()
+  loadFavoritesFromStorage();
+  homePageInit();
 })

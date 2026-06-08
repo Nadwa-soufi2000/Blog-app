@@ -12,32 +12,32 @@
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <div class="brand">
+            <a class="brand" href="#" onclick="changePage('home')">
                 <span class="brand-logo" aria-label="Blog app logo">
-                    <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-                        <rect x="8" y="12" width="32" height="24" rx="8" fill="currentColor" />
-                        <path d="M16 20h10a4 4 0 010 8H16" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" />
-                        <path d="M24 26h6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" />
-                    </svg>
+                   <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                     <rect x="8" y="12" width="32" height="24" rx="8" fill="currentColor" />
+                     <path d="M16 20h10a4 4 0 010 8H16" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" />
+                     <path d="M24 26h6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" />
+                   </svg>
                 </span>
                 <div class="brand-text">
-                    <div class="brand-title">Blog App</div>
-                    <div class="brand-subtitle">Reliable posts, smart reads</div>
+                  <div class="brand-title">Blog App</div>
+                  <div class="brand-subtitle">Reliable posts, smart reads</div>
                 </div>
-            </div>
-            <div class="header-badge">
+            </a>
+            <a class="header-badge" onclick="changePage('favoritePosts')" href="#"> 
                 <span class="badge">1</span>
                 <span class="badge-label">Favorite Posts</span>
-            </div>
+            </a>
         </div>
     </header>
-    <main>
-        <h1>Posts List</h1>
-        <div class="posts-container"></div>
+    <main id="home" class="show">
+       <h1>Posts List</h1>
+       <div class="posts-container"></div>
     </main>
-    <main>
-        <h1>FavoritePosts List</h1>
-        <div class="posts-container"></div>
+    <main id="favoritePosts" class="hide">
+       <h1>FavoritePosts List</h1>
+       <div class="favoritePosts-container"></div>
     </main>
 
     <script src="script.js"></script>
