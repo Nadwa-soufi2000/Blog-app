@@ -28,11 +28,12 @@ main {
 }
 
 main h1 {
-    margin: 0 0 22px 15px;
+    margin: 0 0 22px;
     font-size: 28px;
     line-height: 1.15;
     color: #0b2a4a;
     font-weight: 700;
+    text-align: center;
 }
 
 .site-header {
@@ -229,6 +230,39 @@ main h1 {
     border-color: #1d72b8;
 }
 
+/* Details button (View details) */
+.details-btn {
+    border: 1px solid #1d72b8;
+    background: transparent;
+    color: #1d72b8;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 180ms ease, color 180ms ease, transform 160ms ease, box-shadow 180ms ease;
+}
+
+.details-btn:hover {
+    background: #eef6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(29,114,184,0.08);
+}
+
+.details-btn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .details-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 12px;
+    }
+}
 .favorite-icon {
     font-size: 14px;
     line-height: 1;
@@ -358,5 +392,81 @@ main h1 {
 
     main h1 {
         font-size: 20px;
+    }
+}
+
+/* Details page styles */
+.details-container {
+    background: #ffffff;
+    border: 1px solid #e6eef6;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(16,42,67,0.06);
+    max-width: 900px;
+    margin: 12px auto 36px auto;
+}
+
+.details-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.details-title {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+    color: #0b2a4a;
+}
+
+.details-sub {
+    font-size: 13px;
+    color: #627d98;
+}
+
+.details-body {
+    color: #334e68;
+    line-height: 1.6;
+    font-size: 15px;
+    margin-bottom: 14px;
+}
+
+.details-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.details-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.back-btn {
+    border: none;
+    background: #1d72b8;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.back-btn:hover {
+    background: #1964a6;
+}
+
+@media (max-width: 600px) {
+    .details-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .details-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
     }
 }

@@ -25,7 +25,7 @@ function loadFavoritesFromStorage() {
 async function getPosts(param)
 {   
     const selectors = "select=title,body,tags,id"
-    const posts = param ? `${param}&${selectors}` : `?${selectors}` ;
+    const posts = param ? `${param}&${selectors}` : `?${selectors}`;
     const res = await fetch("https://dummyjson.com/posts" + posts);
     const response = await res.json();
     console.log(response.posts)
@@ -67,6 +67,7 @@ function getListOfPosts(posts)
         <div class="post-footer">
           <div class="tags-inline">${tagsHtml}</div>
           ${favoriteChip}
+          <button type="button" class="details-btn" onclick="changePage('details', ${post.id})">View details</button>
         </div>
       </div>`
    })
